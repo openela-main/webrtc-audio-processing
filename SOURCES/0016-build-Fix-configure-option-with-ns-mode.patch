@@ -1,0 +1,30 @@
+From ee8cfef49b8417c2f0ba65a249d2ee8c360d19ab Mon Sep 17 00:00:00 2001
+From: Mirko Vogt <mirko-dev@nanl.de>
+Date: Fri, 6 Jan 2017 03:04:20 +0100
+Subject: [PATCH 16/16] build: Fix configure option '--with-ns-mode'
+
+Make *really* take '--with-ns-mode'-option into account.
+Before it was bogus (wrong if-check) and it always resulted
+in the float version being used.
+
+Signed-off-by: Mirko Vogt <mirko-dev@nanl.de>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index acbb3e2..e78bf27 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -20,7 +20,7 @@ AC_LANG_CPLUSPLUS
+ AC_ARG_WITH([ns-mode],
+ 	    AS_HELP_STRING([--with-ns-mode=float|fixed], [Noise suppresion mode to use. Default is float]))
+ 
+-AS_CASE(["x${with_ns_mode}"],
++AS_CASE(["${with_ns_mode}"],
+ 	["fixed"], [NS_FIXED=1],
+ 	["float"], [NS_FIXED=0],
+ 	[NS_FIXED=0])
+-- 
+2.14.3
+
